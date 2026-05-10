@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Mother's Day 💐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:  #c9506a;
+      --blush: #f7cdd6;
+      --cream: #fdf5f0;
+      --mauve: #a0677c;
+      --gold:  #d4a05c;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--cream);
+      font-family: 'Lato', sans-serif;
+    }
+
+    .slides { position: fixed; inset: 0; }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      pointer-events: none;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    .slide-1 { background: linear-gradient(150deg, #fde8ee 0%, #fdf5f0 55%, #f5e6d8 100%); }
+    .slide-2 { background: linear-gradient(150deg, #fff0f4 0%, #fdf8f2 55%, #fce8d5 100%); }
+    .slide-3 { background: linear-gradient(150deg, #f5eef8 0%, #fdf5f8 55%, #fce8e8 100%); }
+    .slide-4 { background: linear-gradient(150deg, #e8f0f7 0%, #f5f8fd 55%, #fde8f0 100%); }
+    .slide-5 { background: linear-gradient(150deg, #f0f7f3 0%, #fdfaf5 55%, #fde8ee 100%); }
+
+    .card {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      max-width: 680px;
+      width: 92%;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .slide:not(.active) .card { opacity: 0; transform: translateY(20px); }
+    .slide.active .card      { opacity: 1; transform: translateY(0); }
+
+    .flower-wrap { margin-bottom: 1.4rem; }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 9vw, 6rem);
+      font-weight: 700;
+      color: var(--rose);
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+    }
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--mauve);
+      margin-top: 0.3rem;
+    }
+
+    .sender-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+      color: var(--rose);
+      margin-bottom: 0.3rem;
+    }
+    .divider {
+      width: 50px; height: 2px;
+      background: var(--gold);
+      margin: 0.9rem auto 1.2rem;
+      border-radius: 2px;
+    }
+    .message {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+      color: #7a5a68;
+      line-height: 2;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .sign-off {
+      margin-top: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--mauve);
+    }
+
+    .petal-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+    .petal {
+      position: absolute;
+      border-radius: 50% 0 50% 0;
+      animation: floatUp linear infinite;
+    }
+
+    .nav-btn {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      z-index: 100;
+      background: rgba(255,255,255,0.72);
+      border: 1.5px solid var(--blush);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--mauve); font-size: 1.2rem;
+      transition: background 0.25s, box-shadow 0.25s;
+      backdrop-filter: blur(6px);
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.97); box-shadow: 0 4px 16px rgba(160,103,124,0.18); }
+    .nav-btn.prev { left: 1rem; }
+    .nav-btn.next { right: 1rem; }
+
+    .dots {
+      position: fixed; bottom: 1.8rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.6rem; z-index: 100;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blush); border: 1.5px solid var(--mauve);
+      cursor: pointer; transition: background 0.3s, transform 0.3s;
+    }
+    .dot.active { background: var(--rose); transform: scale(1.35); }
+  </style>
+</head>
+<body>
+
+<div class="slides">
+
+  <!-- Slide 1: Hero -->
+  <div class="slide slide-1 active" id="s0">
+    <div class="petal-bg" id="p0"></div>
+    <div class="card">
+      <div class="flower-wrap">
+        <svg width="100" height="100" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="55" cy="22" rx="12" ry="20" fill="#f7a7b8" opacity="0.9"/>
+          <ellipse cx="55" cy="88" rx="12" ry="20" fill="#f7a7b8" opacity="0.9"/>
+          <ellipse cx="22" cy="55" rx="20" ry="12" fill="#f4bfcd" opacity="0.9"/>
+          <ellipse cx="88" cy="55" rx="20" ry="12" fill="#f4bfcd" opacity="0.9"/>
+          <ellipse cx="31" cy="31" rx="12" ry="20" fill="#f7c3cf" opacity="0.85" transform="rotate(45 31 31)"/>
+          <ellipse cx="79" cy="31" rx="12" ry="20" fill="#f7c3cf" opacity="0.85" transform="rotate(-45 79 31)"/>
+          <ellipse cx="31" cy="79" rx="12" ry="20" fill="#f7c3cf" opacity="0.85" transform="rotate(-45 31 79)"/>
+          <ellipse cx="79" cy="79" rx="12" ry="20" fill="#f7c3cf" opacity="0.85" transform="rotate(45 79 79)"/>
+          <circle cx="55" cy="55" r="16" fill="#d4a05c"/>
+          <circle cx="55" cy="55" r="10" fill="#e8b870"/>
+        </svg>
+      </div>
+      <h1>Happy<br>Mother's Day</h1>
+      <p class="hero-sub">With all our love 💕</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: Toluwani -->
+  <div class="slide slide-2" id="s1">
+    <div class="petal-bg" id="p1"></div>
+    <div class="card">
+      <div class="sender-name">Toluwani 🌸</div>
+      <div class="divider"></div>
+      <p class="message">
+        Happy Mother's Day Mama.<br><br>
+        Thank you for being the best mother for us. Thank you for supporting us, for all your sacrifices, and for leading us to Christ.<br><br>
+        We love you so much — we can't thank you enough. May God reward you with Himself in Jesus name. I pray that you will always have joy as a mother in Jesus name.
+      </p>
+      <p class="sign-off">Love you tooooooo much ❤️</p>
+    </div>
+  </div>
+
+  <!-- Slide 3: Kayin -->
+  <div class="slide slide-3" id="s2">
+    <div class="petal-bg" id="p2"></div>
+    <div class="card">
+      <div class="sender-name">Kayin 🌹</div>
+      <div class="divider"></div>
+      <p class="message">
+        Happy Mother's Day Mum.<br><br>
+        I love you so much and I pray God blesses you on this day. I thank God every day for making you my mother.<br><br>
+        You are the reflection of kindness, grace, and faith I hope to embody one day. Thank you for showing me what it's like to have the best mum ever. You are the most important person to me.
+      </p>
+      <p class="sign-off">❤️❤️</p>
+    </div>
+  </div>
+
+  <!-- Slide 4: Richard -->
+  <div class="slide slide-4" id="s3">
+    <div class="petal-bg" id="p3"></div>
+    <div class="card">
+      <div class="sender-name">Richard 🌿</div>
+      <div class="divider"></div>
+      <p class="message">
+        Happy Mother's Day Mum! 🎉<br><br>
+        I thank the Lord every day that I was born the son of such a caring, understanding mother who always takes the time to think about her children — even when we don't deserve it.<br><br>
+        Thank you Mum for being the best that there ever was.
+      </p>
+      <p class="sign-off">Love you Mum ❤️</p>
+    </div>
+  </div>
+
+  <!-- Slide 5: Aramide -->
+  <div class="slide slide-5" id="s4">
+    <div class="petal-bg" id="p4"></div>
+    <div class="card">
+      <div class="sender-name">Aramide 🌷</div>
+      <div class="divider"></div>
+      <p class="message">
+        Happy Mother's Day Mummy.<br><br>
+        You have given us more than we could ever put into words — your warmth, your prayers, your strength, and your unconditional love. Watching you has taught me what it truly means to love selflessly.<br><br>
+        I thank God every day that He chose you to be our mother. May He continue to bless and keep you, and may your heart be full of joy always.
+      </p>
+      <p class="sign-off">We love you forever ❤️</p>
+    </div>
+  </div>
+
+</div>
+
+<button class="nav-btn prev" onclick="move(-1)" aria-label="Previous">&#8592;</button>
+<button class="nav-btn next" onclick="move(1)"  aria-label="Next">&#8594;</button>
+<div class="dots" id="dots"></div>
+
+<script>
+  const total = 5;
+  let cur = 0, timer;
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dotsEl = document.getElementById('dots');
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = (n + total) % total;
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    resetTimer();
+  }
+  function move(dir) { goTo(cur + dir); }
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => move(1), 7000);
+  }
+  resetTimer();
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') move(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   move(-1);
+  });
+
+  const colors = ['#f7a7b8','#f4bfcd','#f7cdd6','#e8c97a','#c9e8d0','#d4a05c'];
+  function spawnPetals(id, n) {
+    const el = document.getElementById(id);
+    for (let i = 0; i < n; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const sz = 6 + Math.random() * 13;
+      p.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;bottom:-20px;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:${0.25+Math.random()*0.45};animation-duration:${9+Math.random()*13}s;animation-delay:${Math.random()*-22}s;transform:rotate(${Math.random()*45}deg)`;
+      el.appendChild(p);
+    }
+  }
+  for (let i = 0; i < 5; i++) spawnPetals(`p${i}`, 16);
+
+  let sx = null;
+  document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; });
+  document.addEventListener('touchend',   e => {
+    if (sx === null) return;
+    if (Math.abs(e.changedTouches[0].clientX - sx) > 50) move(e.changedTouches[0].clientX - sx < 0 ? 1 : -1);
+    sx = null;
+  });
+</script>
+</body>
+</html>
